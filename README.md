@@ -1,8 +1,13 @@
 # Thumbnail links and action block #
 
-[![Build Status](https://travis-ci.org/call-learning/moodle-block-thumblinks_action.svg?branch=master)](https://travis-ci.org/call-learning/moodle-block-thumblinks_action)
-
+[![Moodle Plugin CI](https://github.com/call-learning/moodle-block_thumblinks_action/actions/workflows/main.yml/badge.svg)](https://github.com/call-learning/moodle-block_thumblinks_action/actions/workflows/main.yml)
 A simple block to setup a series of 3 thumbnails that are linked other pages.
+
+### Supported Moodle versions
+
+This block supports several of the latest Moodle versions.
+
+You can safely use this block with Moodle **4.1**, **4.0**, **3.11**, **3.10**, **3.9**
 
 ## License ##
 

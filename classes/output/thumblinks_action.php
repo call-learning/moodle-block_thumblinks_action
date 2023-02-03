@@ -65,21 +65,30 @@ class thumblinks_action implements renderable, templatable {
     public $ctatitle = '';
 
     /**
+     * The place where the block takes place.
+     *
+     * @var string $region
+     */
+    public $region = '';
+
+    /**
      * thumblinks_action constructor.
      *
-     * @param array $thumbtitles
-     * @param array $thumbimages
-     * @param array $thumburls
-     * @param moodle_url $cta
-     * @param string $ctatitle
-     * @param int $blockcontextid
+     * @param array $thumbtitles the list of the thumbnails titles
+     * @param array $thumbimages the list of the thumbnails images
+     * @param array $thumburls the list of the thumnails urls
+     * @param moodle_url $cta The url where the call to action button will lead to
+     * @param string $ctatitle The Title of the call to action button at the bottom of the block
+     * @param int $blockcontextid the id of the block context
+     * @param string $region the region of the block, usually given by block_thumblinks_action::instance->region
      * @throws coding_exception
      * @throws moodle_exception
      */
-    public function __construct($thumbtitles, $thumbimages, $thumburls, $cta, $ctatitle, $blockcontextid) {
+    public function __construct($thumbtitles, $thumbimages, $thumburls, $cta, $ctatitle, $blockcontextid, $region) {
         $thumbtitlecount = empty($thumbtitles) ? 0 : count($thumbtitles);
         $thumbimgcount = empty($thumbimages) ? 0 : count($thumbimages);
         $numthumbnails = max($thumbtitlecount, $thumbimgcount);
+        $this->region = $region;
         $fs = get_file_storage();
 
         for ($itemi = 0; $itemi < $numthumbnails; $itemi++) {
@@ -115,7 +124,8 @@ class thumblinks_action implements renderable, templatable {
         $exportedvalue = [
             'thumbnails' => $this->thumbnails,
             'ctatitle' => $this->ctatitle,
-            'cta' => ($this->cta) ? $this->cta->out(false) : ''
+            'cta' => ($this->cta) ? $this->cta->out(false) : '',
+            'isonside-pre' => $this->region == 'side-pre'
         ];
         return $exportedvalue;
     }
