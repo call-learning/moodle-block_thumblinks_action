@@ -77,7 +77,7 @@ class block_thumblinks_action_test extends advanced_testcase {
         $block = end($blocks);
         $block = block_instance($blockname, $block->instance);
         $this->block = $block;
-        $this->upload_files_in_block(array('img1.png', 'img2.png'));
+        $this->upload_files_in_block(['img1.png', 'img2.png']);
         $this->block = $block;
     }
 
@@ -106,7 +106,7 @@ class block_thumblinks_action_test extends advanced_testcase {
      */
     public function test_output_renderer_change_files() {
         // We need to reload the block so config is there.
-        $this->upload_files_in_block(array('img4.png', 'img5.png'));
+        $this->upload_files_in_block(['img4.png', 'img5.png']);
         $block = block_instance_by_id($this->block->instance->id);
         $renderer = $this->block->page->get_renderer('core');
         $renderable = new thumblinks_action(
@@ -134,19 +134,19 @@ class block_thumblinks_action_test extends advanced_testcase {
         $configdata = (object) [
             'title' => 'block title',
             'cta' => 'https://www.moodle.org',
-            'ctatitle' => 'Moodle forever'
+            'ctatitle' => 'Moodle forever',
         ];
         $configdata->thumbimage = [];
         foreach ($imagesnames as $index => $filename) {
             $draftitemid = file_get_unused_draft_itemid();
-            $filerecord = array(
+            $filerecord = [
                 'contextid' => $usercontext->id,
                 'component' => 'user',
                 'filearea' => 'draft',
                 'itemid' => $draftitemid,
                 'filepath' => '/',
                 'filename' => $filename,
-            );
+            ];
             // Create an area to upload the file.
             $fs = get_file_storage();
             // Create a file from the string that we made earlier.

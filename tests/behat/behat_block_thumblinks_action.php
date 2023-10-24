@@ -44,6 +44,7 @@ class behat_block_thumblinks_action extends behat_base {
                     <<<XPATH
     .//a[contains(@class,'thumbnail') and contains(normalize-space(.),%locator%)]
 XPATH
+,
                 ]
             ),
         ];

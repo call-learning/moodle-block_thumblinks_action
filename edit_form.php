@@ -63,8 +63,8 @@ class block_thumblinks_action_edit_form extends block_edit_form {
      * @throws coding_exception
      */
     protected function add_thubmnail_elements($mform) {
-        $repeatarray = array();
-        $repeatedoptions = array();
+        $repeatarray = [];
+        $repeatedoptions = [];
 
         $repeatarray[] = $mform->createElement(
             'text',
@@ -124,7 +124,7 @@ class block_thumblinks_action_edit_form extends block_edit_form {
             $numthumbnails = $this->get_current_repeats();
             for ($index = 0; $index < $numthumbnails; $index++) {
                 $fieldname = 'config_thumbimage';
-                $filefields->{$fieldname}[$index] = array();
+                $filefields->{$fieldname}[$index] = [];
                 // Here we could try to use the file_get_submitted_draft_itemid, but it expects to have an itemid defined
                 // Which is not what we have right now, we just have a flat list.
                 $param = optional_param_array($fieldname, 0, PARAM_INT);
@@ -164,10 +164,10 @@ class block_thumblinks_action_edit_form extends block_edit_form {
      * @return array
      */
     protected function get_file_manager_options(): array {
-        return array('subdirs' => 0,
+        return ['subdirs' => 0,
             'maxbytes' => FILE_AREA_MAX_BYTES_UNLIMITED,
             'maxfiles' => 1,
-            'context' => $this->block->context);
+            'context' => $this->block->context, ];
     }
 
     /**
@@ -234,8 +234,8 @@ class block_thumblinks_action_edit_form extends block_edit_form {
         $mform->addElement('hidden', $repeathiddenname, $repeats);
         $mform->setType($repeathiddenname, PARAM_INT);
         // Value not to be overridden by submitted value.
-        $mform->setConstants(array($repeathiddenname => $repeats));
-        $namecloned = array();
+        $mform->setConstants([$repeathiddenname => $repeats]);
+        $namecloned = [];
         for ($i = 0; $i < $repeats; $i++) {
             foreach ($elementobjs as $elementobj) {
                 $elementclone = fullclone($elementobj);
@@ -266,8 +266,8 @@ class block_thumblinks_action_edit_form extends block_edit_form {
                             $mform->setDefault($realelementname, str_replace('{no}', $i + 1, $params));
                             break;
                         case 'helpbutton':
-                            $params = array_merge(array($realelementname), $params);
-                            call_user_func_array(array(&$mform, 'addHelpButton'), $params);
+                            $params = array_merge([$realelementname], $params);
+                            call_user_func_array([&$mform, 'addHelpButton'], $params);
                             break;
                         case 'disabledif':
                             foreach ($namecloned as $num => $name) {
@@ -276,8 +276,8 @@ class block_thumblinks_action_edit_form extends block_edit_form {
                                     break;
                                 }
                             }
-                            $params = array_merge(array($realelementname), $params);
-                            call_user_func_array(array(&$mform, 'disabledIf'), $params);
+                            $params = array_merge([$realelementname], $params);
+                            call_user_func_array([&$mform, 'disabledIf'], $params);
                             break;
                         case 'hideif':
                             foreach ($namecloned as $num => $name) {
@@ -286,15 +286,15 @@ class block_thumblinks_action_edit_form extends block_edit_form {
                                     break;
                                 }
                             }
-                            $params = array_merge(array($realelementname), $params);
-                            call_user_func_array(array(&$mform, 'hideIf'), $params);
+                            $params = array_merge([$realelementname], $params);
+                            call_user_func_array([&$mform, 'hideIf'], $params);
                             break;
                         case 'rule':
                             if (is_string($params)) {
-                                $params = array(null, $params, null, 'client');
+                                $params = [null, $params, null, 'client'];
                             }
-                            $params = array_merge(array($realelementname), $params);
-                            call_user_func_array(array(&$mform, 'addRule'), $params);
+                            $params = array_merge([$realelementname], $params);
+                            call_user_func_array([&$mform, 'addRule'], $params);
                             break;
 
                         case 'type':

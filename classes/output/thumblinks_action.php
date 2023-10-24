@@ -115,7 +115,7 @@ class thumblinks_action implements renderable, templatable {
         $exportedvalue = [
             'thumbnails' => $this->thumbnails,
             'ctatitle' => $this->ctatitle,
-            'cta' => ($this->cta) ? $this->cta->out(false) : ''
+            'cta' => ($this->cta) ? $this->cta->out(false) : '',
         ];
         return $exportedvalue;
     }

@@ -61,7 +61,7 @@ class block_thumblinks_action extends block_base {
     public function get_content() {
         if (!$this->config) {
             $this->content = (object) [
-                'text' => get_string("contentnoconfig", "block_thumblinks_action")
+                'text' => get_string("contentnoconfig", "block_thumblinks_action"),
             ];
             return $this->content;
         }
@@ -76,8 +76,8 @@ class block_thumblinks_action extends block_base {
         }
 
         $this->content = new stdClass();
-        $this->content->items = array();
-        $this->content->icons = array();
+        $this->content->items = [];
+        $this->content->icons = [];
         $this->content->footer = '';
 
         $this->content->text = '';
@@ -110,7 +110,7 @@ class block_thumblinks_action extends block_base {
      * @return array
      */
     public function applicable_formats(): array {
-        return array('all' => true);
+        return ['all' => true];
     }
 
     /**
@@ -149,7 +149,7 @@ class block_thumblinks_action extends block_base {
                     'block_thumblinks_action',
                     'images',
                     $index,
-                    array('subdirs' => true)
+                    ['subdirs' => true]
                 );
             }
             // Here we make sure we copy the image id into the
@@ -162,7 +162,7 @@ class block_thumblinks_action extends block_base {
                 'images'
             );
             foreach ($files as $file) {
-                if (in_array($file->get_filename(), array('.', '..'))) {
+                if (in_array($file->get_filename(), ['.', '..'])) {
                     continue;
                 }
                 $config->thumbimage[$file->get_itemid()] = $file->get_id();
@@ -192,7 +192,7 @@ class block_thumblinks_action extends block_base {
         global $DB;
 
         $fromcontext = context_block::instance($fromid);
-        $blockinstance = $DB->get_record('block_instances', array('id' => $fromcontext->instanceid));
+        $blockinstance = $DB->get_record('block_instances', ['id' => $fromcontext->instanceid]);
         $block = block_instance($blockinstance->blockname, $blockinstance);
         $thumbtitlecount = empty($block->config->thumbtitle) ? 0 : count($block->config->thumbtitle);
         $thumbimgcount = empty($block->config->thumbimage) ? 0 : count($block->config->thumbimage);
@@ -210,7 +210,7 @@ class block_thumblinks_action extends block_base {
                     'block_thumblinks_action',
                     'images',
                     $itemid,
-                    array('subdirs' => true)
+                    ['subdirs' => true]
                 );
                 file_save_draft_area_files(
                     $draftitemid,
@@ -218,7 +218,7 @@ class block_thumblinks_action extends block_base {
                     'block_thumblinks_action',
                     'images',
                     $itemid,
-                    array('subdirs' => true)
+                    ['subdirs' => true]
                 );
             }
         }

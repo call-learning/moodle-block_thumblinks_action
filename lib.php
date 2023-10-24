@@ -56,7 +56,7 @@ function block_thumblinks_action_pluginfile(
     $filearea,
     $args,
     $forcedownload,
-    array $options = array()
+    array $options = []
 ) {
     global $CFG, $USER;
 
@@ -120,7 +120,7 @@ function block_thumblinks_action_pluginfile(
 function block_thumblinks_action_global_db_replace($search, $replace) {
     global $DB;
 
-    $instances = $DB->get_recordset('block_instances', array('blockname' => 'mcms'));
+    $instances = $DB->get_recordset('block_instances', ['blockname' => 'mcms']);
     foreach ($instances as $instance) {
         $config = unserialize(base64_decode($instance->configdata));
         if (isset($config->text) && is_string($config->text)) {
@@ -128,7 +128,7 @@ function block_thumblinks_action_global_db_replace($search, $replace) {
             $DB->update_record('block_instances', (object) [
                 'id' => $instance->id,
                 'configdata' => base64_encode(serialize($config)),
-                'timemodified' => time()]);
+                'timemodified' => time(), ]);
         }
     }
     $instances->close();
